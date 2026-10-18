@@ -1,0 +1,24 @@
+services:
+  # FastAPI Backend Web Service
+  - type: web
+    name: library-management-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: SECRET_KEY
+        value: supersecretjwtkey_for_intelligent_library_management_system_2026
+      - key: FALLBACK_TO_SQLITE
+        value: "True"
+      - key: DEFAULT_DAILY_FINE_RATE
+        value: "5.00"
+      - key: DEFAULT_BORROW_DAYS
+        value: "14"
+      # When connecting to remote MySQL (e.g. Aiven, TiDB, Clever Cloud), set DATABASE_URL in Render Dashboard:
+      # - key: DATABASE_URL
+      #   value: mysql+pymysql://<user>:<password>@<host>:<port>/library_db
+
